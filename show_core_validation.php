@@ -8,7 +8,10 @@ if ( !empty($_POST['id'])) {
     $state_validation_array = $stmt_r->fetch(PDO::FETCH_ASSOC);
 
     // Mettre un ! devant un booléen inverse son état, true devient false, ou false devient true
-    $state_validation =  !$state_validation_array['isValid'];
+    // (int) est un casting c'est à dire on convertit le type en un autre. Si c'est possible.
+    $state_validation =  (int)!$state_validation_array['isValid'];
+
+
 
     $sql = "UPDATE robotic_core SET isValid=? WHERE id=?";
     $stmt = $pdo->prepare($sql);
